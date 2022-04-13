@@ -126,18 +126,15 @@ class Form extends React.Component {
           Super Trybe Trunfo
         </label>
 
-        <label htmlFor="butsave">
-          <button
-            type="button"
-            data-testid="save-button"
-            id="butsave"
-            disabled={ isSaveButtonDisabled }
-            onClick={ onSaveButtonClick }
-          >
-            Salvar
-          </button>
-        </label>
-
+        <button
+          type="button"
+          data-testid="save-button"
+          id="butsave"
+          disabled={ isSaveButtonDisabled }
+          onClick={ onSaveButtonClick }
+        >
+          Salvar
+        </button>
       </form>
     );
   }

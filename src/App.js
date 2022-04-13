@@ -30,6 +30,7 @@ class App extends React.Component {
       [name]: value,
     }, () => this.validation());
   }
+
   validation() {
     const {
       cardName,
