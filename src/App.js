@@ -18,9 +18,45 @@ class App extends React.Component {
       cardTrunfo: false,
       // hasTrunfo: false,
       isSaveButtonDisabled: true,
+      cardList: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.validation = this.validation.bind(this);
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+  }
+
+  onSaveButtonClick() {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    } = this.state;
+
+    const cards = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+    };
+
+    // console.log('cliclou');
+    this.setState((prevState) => ({
+      cardList: [...prevState.cardList, cards],
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+    }));
   }
 
   onInputChange({ target }) {
@@ -43,7 +79,7 @@ class App extends React.Component {
     } = this.state;
 
     const sumAtrr = parseFloat(cardAttr1) + parseFloat(cardAttr2) + parseFloat(cardAttr3);
-    console.log(sumAtrr);
+    // console.log(sumAtrr);
     const valor = 210;
     const max = 90;
 
@@ -83,6 +119,7 @@ class App extends React.Component {
       cardTrunfo,
       // hasTrunfo,
       isSaveButtonDisabled,
+      cardList,
     } = this.state;
     return (
       <main className="container-main">
@@ -93,11 +130,15 @@ class App extends React.Component {
             cardAttr1={ cardAttr1 }
             cardAttr2={ cardAttr2 }
             cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
             onInputChange={ this.onInputChange }
             isSaveButtonDisabled={ isSaveButtonDisabled }
+            onSaveButtonClick={ this.onSaveButtonClick }
           />
         </div>
         <div className="container-prev">
+          <h1>Preview da carta</h1>
           <Card
             cardName={ cardName }
             cardDescription={ cardDescription }
@@ -109,6 +150,18 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
             onInputChange={ this.onInputChange }
           />
+        </div>
+        <div>
+          <h2>Todas as cartas</h2>
+          {cardList.map((item) => (
+            <div key={ cardName }>
+              <p>{item.cardName}</p>
+              <p>{item.cardAttr1}</p>
+              <p>{item.cardAttr2}</p>
+              <p>{item.cardAttr3}</p>
+              <p>{item.cardImage}</p>
+              <p>{item.cardRare}</p>
+            </div>))}
         </div>
       </main>
     );
