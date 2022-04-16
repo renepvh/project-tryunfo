@@ -23,7 +23,15 @@ class App extends React.Component {
     this.onInputChange = this.onInputChange.bind(this);
     this.validation = this.validation.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-    // this.handleHasTrunfo = this.handleHasTrunfo.bind(this);
+    this.handleHasTrunfo = this.handleHasTrunfo.bind(this);
+  }
+
+  handleHasTrunfo() {
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo) {
+      return true;
+    }
+    return true;
   }
 
   onSaveButtonClick() {
@@ -60,8 +68,8 @@ class App extends React.Component {
       cardAttr3: 0,
       cardImage: '',
       cardRare: 'normal',
-      hasTrunfo: true,
-      // cardTrunfo: false,
+      hasTrunfo: this.handleHasTrunfo(),
+      cardTrunfo: false,
     }));
   }
 
@@ -128,50 +136,62 @@ class App extends React.Component {
       cardList,
     } = this.state;
     return (
-      <main className="container-main">
-        <div>
-          <Form
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            hasTrunfo={ hasTrunfo }
-            onInputChange={ this.onInputChange }
-            isSaveButtonDisabled={ isSaveButtonDisabled }
-            onSaveButtonClick={ this.onSaveButtonClick }
-          />
-        </div>
-        <div className="container-prev">
-          <h1>Preview da carta</h1>
-          <Card
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-            onInputChange={ this.onInputChange }
-          />
-        </div>
-        <div>
-          <h2>Todas as cartas</h2>
-          {cardList.map((item) => (
-            <div key={ cardName }>
-              <p>{item.cardName}</p>
-              <p>{item.cardAttr1}</p>
-              <p>{item.cardAttr2}</p>
-              <p>{item.cardAttr3}</p>
-              <p>{item.cardImage}</p>
-              <p>{item.cardRare}</p>
-              <p>{item.hasTrunfo ? 'Super Trunfo' : ''}</p>
-              {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
-            </div>))}
-        </div>
+      <main>
+        <section className="container-main">
+          <div>
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              hasTrunfo={ hasTrunfo }
+              onInputChange={ this.onInputChange }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              onSaveButtonClick={ this.onSaveButtonClick }
+            />
+          </div>
+          <div className="container-prev">
+            <h1>Preview da carta</h1>
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              onInputChange={ this.onInputChange }
+            />
+          </div>
+        </section>
+        <section>
+          <div className="container-main">
+            <h2>Todas as cartas</h2>
+            {cardList.map((item, index) => (
+              <div className="newCards" key={ index }>
+                <div>
+                  <h2 data-testid="name-card">
+                    { item.cardName }
+                  </h2>
+                  <img
+                    src={ item.cardImage }
+                    alt={ item.cardName }
+                    data-testid="image-card"
+                  />
+                  <p data-testid="description-card">{item.cardDescription}</p>
+                  <p data-testid="attr1-card">{item.cardAttr1}</p>
+                  <p data-testid="attr2-card">{item.cardAttr2}</p>
+                  <p data-testid="attr3-card">{item.cardAttr3}</p>
+                  <p data-testid="rare-card">{item.cardRare}</p>
+                  {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
+                </div>
+              </div>))}
+          </div>
+        </section>
       </main>
     );
   }
