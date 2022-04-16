@@ -16,13 +16,14 @@ class App extends React.Component {
       cardImage: '',
       cardRare: '',
       cardTrunfo: false,
-      // hasTrunfo: false,
+      hasTrunfo: false,
       isSaveButtonDisabled: true,
       cardList: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.validation = this.validation.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    // this.handleHasTrunfo = this.handleHasTrunfo.bind(this);
   }
 
   onSaveButtonClick() {
@@ -34,6 +35,8 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
+      hasTrunfo,
+      cardTrunfo,
     } = this.state;
 
     const cards = {
@@ -44,9 +47,10 @@ class App extends React.Component {
       cardAttr3,
       cardImage,
       cardRare,
+      hasTrunfo,
+      cardTrunfo,
     };
 
-    // console.log('cliclou');
     this.setState((prevState) => ({
       cardList: [...prevState.cardList, cards],
       cardName: '',
@@ -56,6 +60,8 @@ class App extends React.Component {
       cardAttr3: 0,
       cardImage: '',
       cardRare: 'normal',
+      hasTrunfo: true,
+      // cardTrunfo: false,
     }));
   }
 
@@ -117,7 +123,7 @@ class App extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
-      // hasTrunfo,
+      hasTrunfo,
       isSaveButtonDisabled,
       cardList,
     } = this.state;
@@ -132,6 +138,7 @@ class App extends React.Component {
             cardAttr3={ cardAttr3 }
             cardImage={ cardImage }
             cardRare={ cardRare }
+            hasTrunfo={ hasTrunfo }
             onInputChange={ this.onInputChange }
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onSaveButtonClick={ this.onSaveButtonClick }
@@ -161,6 +168,8 @@ class App extends React.Component {
               <p>{item.cardAttr3}</p>
               <p>{item.cardImage}</p>
               <p>{item.cardRare}</p>
+              <p>{item.hasTrunfo ? 'Super Trunfo' : ''}</p>
+              {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
             </div>))}
         </div>
       </main>
