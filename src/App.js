@@ -188,6 +188,13 @@ class App extends React.Component {
                   <p data-testid="attr3-card">{item.cardAttr3}</p>
                   <p data-testid="rare-card">{item.cardRare}</p>
                   {cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : ''}
+                  <button
+                    type="button"
+                    data-testid="delete-button"
+                    onClick={ () => {} }
+                  >
+                    Excluir
+                  </button>
                 </div>
               </div>))}
           </div>
